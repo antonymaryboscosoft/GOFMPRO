@@ -1,0 +1,97 @@
+package gofmpro;
+
+import junit.framework.Assert;
+
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+import Com.TestBase.TestBase;
+import Pages.GOFT26;
+import Pages.GOFT3;
+import Pages.GOFT27;
+import TestUtil.TestUtil;
+
+public class GOFT26Test extends TestBase{
+	GOFT3 gOFT3;
+	GOFT26 gOFT26;
+	GOFT27 gOFT27;
+	
+	//ExtentHtmlReporter htmlReporter;
+	ExtentReports report;
+	ExtentTest  logger;
+
+	public GOFT26Test(){
+		super();
+		
+	}
+	@BeforeMethod
+	public void setUp() throws InterruptedException{
+		initialization();
+	
+		gOFT3 = new GOFT3();
+		gOFT26 = new GOFT26();
+		gOFT27 = new GOFT27();
+		
+		report = new ExtentReports(System.getProperty("user.dir")+"/Screenshot/ExtentReport.html");
+	//	report = new ExtentReports("/home/zentere/Desktop/ExtentReport/gofmpro.html");
+		
+	//	logger =report.startTest("loginTest");
+}
+	@Test(priority=1)
+	public void loginTest() throws InterruptedException{
+		logger = report.startTest("LoginPage");
+		gOFT26 = gOFT3.login(prop.getProperty("Email"), prop.getProperty("Password"));
+			logger.log(LogStatus.INFO, "successfully Login ");
+			Thread.sleep(2000);
+			String screenshotpath = TestUtil.captureScreenshot(driver,"screenshotName");
+			logger.log(LogStatus.PASS, logger.addScreenCapture(screenshotpath));
+
+			
+			logger =report.startTest("CreateCompany");
+			gOFT27 =gOFT26.CreateCompany(prop.getProperty("CompanyName"),
+					prop.getProperty("Code"));
+				logger.log(LogStatus.INFO, "CreateCompany successfully ");
+
+	}
+	
+
+	@AfterMethod
+	public void tearDown(ITestResult result){
+		
+		if(result.getStatus()== ITestResult.FAILURE)
+			
+		{
+			String screenshotpath = TestUtil.captureScreenshot(driver,"screenshotName");
+			logger.log(LogStatus.FAIL, result.getName());
+			logger.log(LogStatus.FAIL, result.getThrowable());	
+			logger.log(LogStatus.FAIL, logger.addScreenCapture(screenshotpath));
+		}else if(result.getStatus()== ITestResult.SUCCESS)
+		{
+			String screenshotpath = TestUtil.captureScreenshot(driver,"screenshotName");
+
+			logger.log(LogStatus.PASS, result.getName());
+			logger.log(LogStatus.PASS, result.getThrowable());
+			logger.log(LogStatus.PASS, logger.addScreenCapture(screenshotpath));
+		}else if(result.getStatus()== ITestResult.SKIP)
+		{
+			logger.log(LogStatus.SKIP, result.getName());
+			logger.log(LogStatus.SKIP, result.getThrowable());
+			logger.log(LogStatus.SKIP, logger.addScreenCapture("/home/zentere/Desktop/ExtentReport/gofmpro.html"));
+		}
+		report.endTest(logger);
+		report.flush();
+		driver.get("screenshotpath");
+		driver.close();
+	}
+	@AfterTest
+	public void endTest() {
+		report.flush();
+	}
+}

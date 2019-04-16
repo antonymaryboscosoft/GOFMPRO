@@ -1,0 +1,4 @@
+url=https://ifmpdemo.zentere.com/web/login
+Email =admin
+Password= Welcome#1
+//*[@id="login"]

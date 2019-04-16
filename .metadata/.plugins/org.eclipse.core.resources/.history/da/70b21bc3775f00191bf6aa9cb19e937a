@@ -1,0 +1,96 @@
+package gofmpro;
+
+import java.util.concurrent.TimeUnit;
+
+import junit.framework.Assert;
+
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+import Com.TestBase.TestBase;
+import Pages.GOFT26;
+import Pages.GOFT3;
+import Pages.GOFT27;
+import TestUtil.TestUtil;
+
+public class GOFT26Test extends TestBase{
+	GOFT3 gOFT3;
+	GOFT26 gOFT26;
+	GOFT27 gOFT27;
+	
+	//ExtentHtmlReporter htmlReporter;
+	ExtentReports extent;
+	ExtentTest  test;
+
+	public GOFT26Test(){
+		super();
+		
+	}
+	@BeforeMethod
+	public void setUp() throws InterruptedException{
+		initialization();
+	
+		gOFT3 = new GOFT3();
+		gOFT26 = new GOFT26();
+		gOFT27 = new GOFT27();
+		
+		extent = new ExtentReports(System.getProperty("user.dir")+"/Screenshot/ExtentReport.html");
+	//	report = new ExtentReports("/home/zentere/Desktop/ExtentReport/gofmpro.html");
+		
+	//	logger =report.startTest("loginTest");
+}
+	@Test(priority=1)
+	public void loginTest() throws InterruptedException{
+		test = extent.startTest("LoginPage");
+				gOFT26 = gOFT3.login(prop.getProperty("Email"), prop.getProperty("Password"));
+		test.log(LogStatus.INFO, "successfully Login ");
+			
+		/*	//capture screen
+		String screenshotpath = TestUtil.captureScreenshot(driver,"login");
+		test.log(LogStatus.PASS, test.addScreenCapture(screenshotpath));
+*/
+		test = extent.startTest("CreateCompany");
+			   gOFT27 =gOFT26.CreateCompany(prop.getProperty("CompanyName"),prop.getProperty("Code"));
+		test.log(LogStatus.INFO, "CreateCompany successfully ");
+
+	}
+	
+
+	@AfterMethod
+	public void tearDown(ITestResult result){
+		
+		if(result.getStatus()== ITestResult.FAILURE)
+			
+		{
+			String screenshotpath = TestUtil.captureScreenshot(driver,"CreateCompany");
+			test.log(LogStatus.FAIL, result.getName());
+			test.log(LogStatus.FAIL, result.getThrowable());	
+			test.log(LogStatus.FAIL, test.addScreenCapture(screenshotpath));
+		}else if(result.getStatus()== ITestResult.SUCCESS)
+		{
+			String screenshotpath = TestUtil.captureScreenshot(driver,"screenshotName");
+
+			test.log(LogStatus.PASS, result.getName());
+			test.log(LogStatus.PASS, result.getThrowable());
+			test.log(LogStatus.PASS, test.addScreenCapture(screenshotpath));
+		}
+		//report.endTest(logger);
+		/*report.flush();
+		driver.get("screenshotpath");*/
+		//driver.close();
+	}
+	@AfterTest
+	public void endTest() {
+	
+		extent.flush();
+	}
+}

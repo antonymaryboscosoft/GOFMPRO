@@ -1,0 +1,30 @@
+package TestUtil;
+
+import java.io.File;
+
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
+
+import Com.TestBase.TestBase;
+
+public class TestUtil extends TestBase{
+	public static long PAGE_LOAD_TIMEOUT = 20;
+	public static long IMPLICIT_WAIT = 10;
+	
+	public void switchToFrame(){
+		driver.switchTo().frame("mainpanel");
+	}
+	public static void captureScreenshot(WebDriver driver,String screenshotName)
+	
+	{
+		try {
+			TakesScreenshot ts=(TakesScreenshot)driver;
+			File source=ts.getScreenshotAs(OutputType.FILE);
+			//enterscreenshot folder name
+			FileUtils.copyFile(source, new File("./Screenshot/"+screenshotName+".png"));
+			System.out.println("Screen shot taken");
+		} catch (Exception e) {
+			System.out .println("Exception while taking the screen shot");
+		} }
+
+}

@@ -1,0 +1,91 @@
+package gofmpro;
+
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.relevantcodes.extentreports.LogStatus;
+
+import Com.TestBase.TestBase;
+import Pages.HomePage;
+import Pages.LoginPage;
+import Pages.MaintenancePage;
+
+public class HomePageTest extends TestBase{
+	LoginPage loginPage;
+	HomePage homePage;
+	MaintenancePage maintenancePage;
+	
+	ExtentReports report;
+	ExtentTest  logger;
+
+	public HomePageTest(){
+		super();
+		
+	}
+	@BeforeMethod
+	public void setUp() throws InterruptedException{
+		initialization();
+	
+		loginPage = new LoginPage();
+		homePage = new HomePage();
+		maintenancePage = new MaintenancePage();
+		report = new ExtentReports("/home/zentere/Desktop/ExtentReport/gofmpro.html");
+		logger =report.startTest("loginTest");
+}
+	@Test(priority=1)
+	public void loginTest() throws InterruptedException{
+		homePage = loginPage.login(prop.getProperty("Email"), prop.getProperty("Password"));
+			logger.log(LogStatus.INFO, "successfully Login ");
+			Thread.sleep(2000);
+			logger.log(LogStatus.PASS, logger.addScreenCapture("/home/zentere/Desktop/ExtentReport/gofmpro.html"));
+			
+			logger =report.startTest("CreateCompany");
+			maintenancePage =homePage.CreateCompany(prop.getProperty("CompanyName"),
+					prop.getProperty("Code"), prop.getProperty("CompanyCategory"));
+				logger.log(LogStatus.INFO, "CreateCompany successfully ");
+	}
+	@Test(priority=2) 
+	public void verifyCreateCompany() throws InterruptedException{
+		maintenancePage =homePage.CreateCompany(prop.getProperty("CompanyName"),
+				prop.getProperty("Code"), prop.getProperty("CompanyCategory"));
+			logger.log(LogStatus.INFO, "CreateCompany successfully ");
+		
+	}
+
+	@AfterMethod
+	public void tearDown(ITestResult result){
+		
+		if(result.getStatus()== ITestResult.FAILURE)
+		{
+			//String Screenshot = TestUtil.captureScreenshot(driver);
+			//If(result.getStatus()==ITestResult.FAILURE )
+			//String screenShot_path=Utility.captureScreenshot(driver,result.getName());
+			logger.log(LogStatus.FAIL, result.getName());
+			logger.log(LogStatus.FAIL, result.getThrowable());	
+			logger.log(LogStatus.FAIL, logger.addScreenCapture("/home/zentere/Desktop/ExtentReport/gofmpro.html"));
+		}else if(result.getStatus()== ITestResult.SUCCESS)
+		{
+			logger.log(LogStatus.PASS, result.getName());
+			logger.log(LogStatus.PASS, result.getThrowable());
+			logger.log(LogStatus.PASS, logger.addScreenCapture("/home/zentere/Desktop/ExtentReport/gofmpro.html"));
+		}else if(result.getStatus()== ITestResult.SKIP)
+		{
+			logger.log(LogStatus.SKIP, result.getName());
+			logger.log(LogStatus.SKIP, result.getThrowable());
+			logger.log(LogStatus.SKIP, logger.addScreenCapture("/home/zentere/Desktop/ExtentReport/gofmpro.html"));
+		}
+		report.endTest(logger);
+		report.flush();
+		driver.get("/home/zentere/Desktop/ExtentReport/gofmpro.html");
+		driver.close();
+	}
+	@AfterTest
+	public void endTest() {
+		report.flush();
+	}
+}

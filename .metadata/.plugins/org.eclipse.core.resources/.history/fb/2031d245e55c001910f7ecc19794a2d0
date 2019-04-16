@@ -1,0 +1,41 @@
+package Pages;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import TestUtil.TestUtil;
+import Com.TestBase.TestBase;
+
+public class LoginPage extends TestBase{
+	
+	@FindBy(xpath="//input[@placeholder='Email']")
+	WebElement Email;
+	
+	@FindBy(xpath="//input[@id='password']")
+	WebElement Password;
+	
+	@FindBy(xpath="//button[@type='submit']")
+	WebElement Submit;
+
+	//Initializing the Page Objects:
+	public LoginPage(){
+		PageFactory.initElements(driver, this);
+	}
+	public HomePage login(String em, String pwd) throws InterruptedException{
+		Email.sendKeys(em);
+		Password.sendKeys(pwd);
+		Thread.sleep(2000);
+		Submit.click();
+		    	/*JavascriptExecutor js = (JavascriptExecutor)driver;
+		    	js.executeScript("arguments[0].click();", loginBtn);*/
+		Thread.sleep(2000);
+
+	//	TestUtil.captureScreenshot(driver, "/home/zentere/Desktop/ExtentReport/gofmpro.html");
+		    
+		    
+		
+		return new HomePage();
+	}
+
+}

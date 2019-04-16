@@ -1,0 +1,7 @@
+package Com.Modules;
+
+import Com.TestBase.TestBase;
+
+public class MaintenancePage extends TestBase{
+
+}

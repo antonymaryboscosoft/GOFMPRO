@@ -1,0 +1,30 @@
+package Pages;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import Com.TestBase.TestBase;
+
+public class HomePage extends TestBase {
+	
+	@FindBy(xpath="//span[@class='icon']")
+	WebElement Iconclick;
+	
+
+	//Initializing the Page Objects:
+	public HomePage(){
+		PageFactory.initElements(driver, this);
+	}
+	public MaintenancePage CreateCompany(String CmpNa, String Cd, String CmpCtg){
+		Iconclick.click();
+		
+		
+		return new MaintenancePage();
+
+		
+	}
+	
+	
+
+}

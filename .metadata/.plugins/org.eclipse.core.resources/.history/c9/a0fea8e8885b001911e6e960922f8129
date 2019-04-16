@@ -1,0 +1,62 @@
+package Com.Modules;
+
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+
+import Com.TestBase.TestBase;
+
+public class HomePage extends TestBase {
+	
+	@FindBy(xpath="//span[@class='icon']")
+	WebElement  Icon;
+
+	@FindBy(xpath="//div[@class='oe_apps_menu o_tooltip_parent']")
+	WebElement Setting;
+	
+	@FindBy(xpath="//i[@class='fa fa-plus']")
+	WebElement ClickPlus;
+	
+	//dropdown click company
+	
+	@FindBy(xpath="//span[contains(text(),'Companies')]")
+	WebElement ClickCompany;
+	
+	@FindBy(xpath="//button[contains(text(),'Create')]")
+	WebElement Create;
+	
+	@FindBy(xpath="//div[@name='name']//input[@type='text']")
+	WebElement CompanyName;
+	
+	@FindBy(xpath="//input[@name='code']")
+	WebElement Code;
+	
+	@FindBy(xpath="//div[@name='res_company_categ_id']//input[@type='text']")
+	WebElement CompanyCategory;
+	
+	
+	//Initializing the Page Objects:
+		public HomePage(){
+			PageFactory.initElements(driver, this);
+			
+		}
+		
+		public MaintenancePage() CreateCompany(String CmpNa, String cd, String CmpCtg){
+			
+			ClickPlus.click();	
+			scrollIntoView(Setting, driver);
+			ClickPlus.click();
+			ClickCompany.click();
+			Create.click();
+			CompanyName.sendKeys(CmpNa);
+			Code.sendKeys(cd);
+			CompanyCategory.sendKeys(CmpCtg);
+			return new MaintenancePage();
+		}
+		public  static void scrollIntoView(WebElement element, WebDriver driver){
+			JavascriptExecutor js = ((JavascriptExecutor)driver);
+			js.executeScript("arguments[0].scrollIntoView(true);", element);
+		}
+}

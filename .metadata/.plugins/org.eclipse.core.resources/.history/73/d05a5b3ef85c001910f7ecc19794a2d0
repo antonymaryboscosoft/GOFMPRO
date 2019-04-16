@@ -1,0 +1,7 @@
+package Pages;
+
+import Com.TestBase.TestBase;
+
+public class GOFT27 extends TestBase{
+
+}
