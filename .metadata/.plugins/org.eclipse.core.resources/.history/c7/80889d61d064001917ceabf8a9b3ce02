@@ -1,0 +1,37 @@
+package com.hs.gofmpro.testcase;
+
+import org.testng.annotations.BeforeMethod;
+
+import com.hs.gofmpro.base.TestBase;
+import com.hs.gofmpro.pages.CreateCompany;
+import com.hs.gofmpro.pages.CreateSpaceCategory;
+import com.hs.gofmpro.pages.CreateUser;
+import com.hs.gofmpro.pages.Login;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+
+public class TestCreateSpaceCategory extends TestBase{
+	Login login;
+	CreateCompany createCompany;
+	CreateUser createUser;
+	CreateSpaceCategory createSpaceCategory;
+	CreateEquipmentCategory createEquipmentCategory;
+
+	ExtentReports extent;
+	ExtentTest  logger;
+	public TestCreateSpaceCategory(){
+		super();
+		}
+	
+@BeforeMethod
+	public void setUp() throws InterruptedException{
+	initialization();
+	login = new Login();
+	createCompany = new CreateCompany();
+	createUser = new CreateUser();
+	createSpaceCategory = new CreateSpaceCategory();
+	extent = new ExtentReports("/home/zentere/workspace/gofmpro/ErrorScreenshot/ExtentReport.html");
+	logger  = extent.startTest("loginPage");
+	}
+
+}

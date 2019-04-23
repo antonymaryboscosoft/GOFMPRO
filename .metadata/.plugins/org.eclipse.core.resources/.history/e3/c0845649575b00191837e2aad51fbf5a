@@ -1,7 +1,0 @@
-package Com.Modules;
-
-import Com.TestBase.TestBase;
-
-public class HomePage extends TestBase {
-
-}

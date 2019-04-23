@@ -16,7 +16,6 @@
 <fullyQualifiedTypeName name="java.util.Date"/>
 <fullyQualifiedTypeName name="java.util.Calendar"/>
 <fullyQualifiedTypeName name="org.testng.IResultMap"/>
-<fullyQualifiedTypeName name="org.testng.annotations.Test"/>
 <fullyQualifiedTypeName name="java.util.Properties"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.chrome.ChromeDriver"/>
@@ -25,7 +24,6 @@
 <fullyQualifiedTypeName name="org.openqa.selenium.WebElement"/>
 <fullyQualifiedTypeName name="Pages.LoginPage"/>
 <fullyQualifiedTypeName name="Pages.HomePage"/>
-<fullyQualifiedTypeName name="Com.TestBase.TestBase"/>
 <fullyQualifiedTypeName name="Pages.MaintenancePage"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.JavascriptExecutor"/>
 <fullyQualifiedTypeName name="com.relevantcodes.extentreports.ExtentTest"/>
@@ -37,10 +35,6 @@
 <fullyQualifiedTypeName name="org.apache.commons.io.FileUtils"/>
 <fullyQualifiedTypeName name="com.relevantcodes.extentreports.ExtentReports"/>
 <fullyQualifiedTypeName name="org.testng.annotations.AfterTest"/>
-<fullyQualifiedTypeName name="com.relevantcodes.extentreports.LogStatus"/>
-<fullyQualifiedTypeName name="org.openqa.selenium.By"/>
-<fullyQualifiedTypeName name="org.openqa.selenium.support.ui.Select"/>
-<fullyQualifiedTypeName name="java.util.List"/>
 <fullyQualifiedTypeName name="junit.framework.Assert"/>
 <fullyQualifiedTypeName name="TestUtil.TestUtil"/>
 <fullyQualifiedTypeName name="org.openqa.selenium.support.ui.WebDriverWait"/>
@@ -51,4 +45,16 @@
 <fullyQualifiedTypeName name="com.aventstack.extentreports.Status"/>
 <fullyQualifiedTypeName name="com.aventstack.extentreports.markuputils.MarkupHelper"/>
 <fullyQualifiedTypeName name="com.aventstack.extentreports.markuputils.ExtentColor"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.By"/>
+<fullyQualifiedTypeName name="Com.TestBase.TestBase"/>
+<fullyQualifiedTypeName name="Pages.GOFT28"/>
+<fullyQualifiedTypeName name="org.testng.annotations.Test"/>
+<fullyQualifiedTypeName name="javax.net.ssl.SSLEngineResult.Status"/>
+<fullyQualifiedTypeName name="org.openqa.selenium.support.ui.Select"/>
+<fullyQualifiedTypeName name="com.hs.gofmpro.pages.CreateSapceCategory"/>
+<fullyQualifiedTypeName name="com.hs.gofmpro.pages.CreateEquipmentCategory"/>
+<fullyQualifiedTypeName name="com.hs.gofmpro.pages.CreateSpace"/>
+<fullyQualifiedTypeName name="com.hs.gofmpro.base.TestBase"/>
+<fullyQualifiedTypeName name="com.relevantcodes.extentreports.LogStatus"/>
 </qualifiedTypeNameHistroy>

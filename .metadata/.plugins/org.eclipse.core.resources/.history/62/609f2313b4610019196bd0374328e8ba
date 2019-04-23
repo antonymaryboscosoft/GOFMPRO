@@ -1,0 +1,15 @@
+url = https://ifmpdemo.zentere.com/web/login
+Email = admin
+Password = Welcome#1
+browser = chrome
+==================
+GOFT26
+
+
+CompanyName = Test
+Code = 111
+
+=================
+GOFT27
+EnterName = Anto
+EnterEmail = Anto@gmail.com
