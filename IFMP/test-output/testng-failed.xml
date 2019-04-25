@@ -3,13 +3,11 @@
 <suite name="Failed suite [Default suite]">
   <test name="Default test(failed)">
     <classes>
-      <class name="Com.LoginTest.HomePageTest">
+      <class name="com.hs.gofmpro.testcase.TestCreateSpaceCategory">
         <methods>
           <include name="loginTest"/>
-          <include name="setUp"/>
-          <include name="tearDown"/>
         </methods>
-      </class> <!-- Com.LoginTest.HomePageTest -->
+      </class> <!-- com.hs.gofmpro.testcase.TestCreateSpaceCategory -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
