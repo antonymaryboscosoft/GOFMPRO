@@ -24,13 +24,13 @@ public void setUp(){
 
 @Test(priority=1)
 public void loginTest() throws InterruptedException{
-	Logger logger=Logger.getLogger("loginTest");
- // configure log4j properties file
-	PropertyConfigurator.configure("Log4j.properties");
-	createCompany = login.login(prop.getProperty("Email"), prop.getProperty("Password"));
+		Logger logger=Logger.getLogger("loginTest");
+		// configure log4j properties file
+		PropertyConfigurator.configure("Log4j.properties");
+		createCompany = login.login(prop.getProperty("Email"), prop.getProperty("Password"));
 		logger.info("get login Data from Config file");
 		logger.info("Successfully Login");
 		}
-	}
+		}
 
 

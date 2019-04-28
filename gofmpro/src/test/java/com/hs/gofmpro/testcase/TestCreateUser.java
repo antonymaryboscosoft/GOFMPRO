@@ -1,10 +1,13 @@
 package com.hs.gofmpro.testcase;
 
 import java.io.IOException;
+
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import com.hs.gofmpro.base.TestBase;
 import com.hs.gofmpro.pages.CreateCompany;
 import com.hs.gofmpro.pages.CreateSpaceCategory;
@@ -22,6 +25,9 @@ public class TestCreateUser extends TestBase{
 		CreateSpaceCategory createSpaceCategory;
 		ExtentReports extent;
 		ExtentTest  logger;
+		TestUtil testUtil;
+		String sheetName = "contacts";
+		
 public TestCreateUser(){
 		super();
 		}
@@ -32,13 +38,18 @@ public void setUp() throws InterruptedException{
 		createCompany = new CreateCompany();
 		createUser = new CreateUser();
 		createSpaceCategory = new CreateSpaceCategory();
+		createCompany = login.login(prop.getProperty("Email"), prop.getProperty("Password"));	
 		extent = new ExtentReports("/home/zentere/workspace/gofmpro/ErrorScreenshot/ExtentReport.html");
 		logger  = extent.startTest("loginPage");
 		}
-@Test(priority=1)
-public void loginTest() throws InterruptedException{
+@DataProvider
+public Object[][] getCRMTestData(){
+		Object data[][] = TestUtil.getTestData(sheetName);
+		return data;
+		}
+@Test(dataProvider="getCRMTestData")
+public void loginTest(String EnterName, String EnterEmail) throws InterruptedException{
 //Test1
-			createCompany = login.login(prop.getProperty("Email"), prop.getProperty("Password"));	
 			logger.log(LogStatus.PASS, "Login Page Pass");
 			String screenshotpath = TestUtil.captureScreenshot(driver,"login");
 			logger.log(LogStatus.PASS, logger.addScreenCapture(screenshotpath));
@@ -55,17 +66,15 @@ public void loginTest() throws InterruptedException{
 			
 //Test3
 			 ExtentTest  test3= extent.startTest("CreateUser");
-			 createSpaceCategory =createUser.CreateUser(prop.getProperty("EnterName"), prop.getProperty("EnterEmail"));
+			 createUser.CreateUser(EnterName, EnterEmail);
+			// createSpaceCategory =createUser.CreateUser(prop.getProperty("EnterName"), prop.getProperty("EnterEmail"));
 			 test3.log(LogStatus.PASS, "CreateUser Pass");
 			 String screenshotpath2 = TestUtil.captureScreenshot(driver,"CreateUser");
 			 test3.log(LogStatus.PASS, logger.addScreenCapture(screenshotpath2));
 			 test3.log(LogStatus.INFO, "Successfully CreateUser ");
 			 
-			 createSpaceCategory = createUser.DeleteCreateUser();
+			createSpaceCategory = createUser.DeleteCreateUser();
 			 }
-	
-	
-
 @AfterMethod
 public void tearDown(ITestResult result) throws IOException{
 		if(result.getStatus()== ITestResult.FAILURE)		

@@ -49,7 +49,6 @@ public class CreateUser extends TestBase{
 		
 		@FindBy(xpath="//select[@name='type']")
 		WebElement SelectType;
-		
 	
 		@FindBy(xpath="//input[@name='email']")
 		WebElement EnterEmail;
@@ -104,7 +103,7 @@ public class CreateUser extends TestBase{
 			element.click();
 			break;	
 			}		
-			System.out.println("Selected Storeowner is ====== "+innnerhtml);	
+			System.out.println("Selected roles is ====== "+innnerhtml);	
 			}
 		Thread.sleep(5000);
 		SelectType.click();
@@ -120,7 +119,7 @@ public class CreateUser extends TestBase{
 			element.click();
 			break;	
 			}		
-			System.out.println("Selected Storeowner is ====== "+innnerhtml);	
+			System.out.println("Selected type is ====== "+innnerhtml);	
 			}
 		Thread.sleep(5000);
 		EnterEmail.sendKeys(EEmail);
@@ -130,7 +129,7 @@ public class CreateUser extends TestBase{
 		return new CreateSpaceCategory();	
 		}
 public CreateSpaceCategory DeleteCreateUser() throws InterruptedException{
-			Thread.sleep(5000);
+			/*Thread.sleep(5000);
 			Iconclick.click();
 			JavascriptExecutor js = (JavascriptExecutor) driver;
 	        js.executeScript("arguments[0].scrollIntoView();", Setting);
@@ -140,7 +139,7 @@ public CreateSpaceCategory DeleteCreateUser() throws InterruptedException{
 			Thread.sleep(5000);
 			ClickUser.click();
 			Thread.sleep(5000);
-			ClickTechnopolis.click();
+			ClickTechnopolis.click();*/
 			/*ClickDelete1.click();
 			ClickOk.click();*/
 			Thread.sleep(5000);

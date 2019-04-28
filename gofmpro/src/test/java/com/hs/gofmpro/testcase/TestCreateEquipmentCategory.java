@@ -1,11 +1,13 @@
 package com.hs.gofmpro.testcase;
 
 import java.io.IOException;
+
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
 import com.hs.gofmpro.base.TestBase;
 import com.hs.gofmpro.pages.CreateCompany;
 import com.hs.gofmpro.pages.CreateEquipmentCategory;
@@ -24,12 +26,12 @@ public class TestCreateEquipmentCategory extends TestBase {
 		CreateUser createUser;
 		CreateSpaceCategory createSpaceCategory;
 		CreateEquipmentCategory createEquipmentCategory;
+		TestUtil testUtil;
 		CreateSpace createSpace;
 		ExtentReports extent;
 		ExtentTest  logger;
 	
-		String sheetName ="GofmInput";
-
+		String sheetName = "category";
 	
 public TestCreateEquipmentCategory(){
 		super();
@@ -40,6 +42,7 @@ public void setUp() throws InterruptedException, IOException{
 		login = new Login();
 		createCompany = new CreateCompany();
 		createUser = new CreateUser();
+		testUtil = new TestUtil();
 		createSpaceCategory = new CreateSpaceCategory();
 		createEquipmentCategory = new CreateEquipmentCategory();
 		createSpace = new CreateSpace();
@@ -48,14 +51,14 @@ public void setUp() throws InterruptedException, IOException{
 		}
 
 @DataProvider
-public Object[][] getData(){
-		Object data [][] =	TestUtil.getTestData(sheetName);
-		return data;
-	
+public Object[][] getGofmTestData(){
+	Object data[][] = TestUtil.getTestData(sheetName);
+	return data;
 }
 
-@Test(priority=1, dataProvider="getData")
-public void loginTest(String EnterSName) throws InterruptedException{
+@Test(priority=1, dataProvider="getGofmTestData")
+//@Test
+public void GOFMPROTest(String EnterSName, String EnterEName) throws InterruptedException{
 //Test1
 		createCompany = login.login(prop.getProperty("Email"), prop.getProperty("Password"));	
 		logger.log(LogStatus.PASS, "Login Page Pass");
@@ -76,8 +79,9 @@ public void loginTest(String EnterSName) throws InterruptedException{
 		test2.log(LogStatus.PASS, logger.addScreenCapture(screenshotpathDC));
 		test2.log(LogStatus.INFO, "Successfully DeleteCompany ");*/
 		
-/*//Test3
+//Test3
 		 ExtentTest  test3= extent.startTest("CreateUser");
+		// createUser.CreateUser(EnterName, EnterEmail);
 		 createSpaceCategory =createUser.CreateUser(prop.getProperty("EnterName"), prop.getProperty("EnterEmail"));
 		 test3.log(LogStatus.PASS, "CreateUser Pass");
 		 String screenshotpath2 = TestUtil.captureScreenshot(driver,"CreateUser");
@@ -86,13 +90,12 @@ public void loginTest(String EnterSName) throws InterruptedException{
 		 createSpaceCategory = createUser.DeleteCreateUser();
 		 String screenshotpathD = TestUtil.captureScreenshot(driver,"DeleteUser");
 		 test3.log(LogStatus.PASS, logger.addScreenCapture(screenshotpathD));
-		 test3.log(LogStatus.INFO, "Successfully DeleteUser ");*/
+		 test3.log(LogStatus.INFO, "Successfully DeleteUser ");
 		
 //Test4
 		 ExtentTest test4 = extent.startTest("CreateSpaceCategory");
-		 
-		// createEquipmentCategory = createSpaceCategory.createSpaceCat(prop.getProperty("EnterSName"));
-		 createEquipmentCategory = createSpaceCategory.createSpaceCat(EnterSName);
+		 createSpaceCategory.createSpaceCat(EnterSName );
+		 //createEquipmentCategory = createSpaceCategory.createSpaceCat(prop.getProperty("EnterSName"));
 		 test4.log(LogStatus.PASS, "CreateSpaceCategory Pass");
 		 String screenshotpath3 = TestUtil.captureScreenshot(driver, "CreateSpaceCategory");
 		 test4.log(LogStatus.PASS, logger.addScreenCapture(screenshotpath3));
@@ -104,7 +107,8 @@ public void loginTest(String EnterSName) throws InterruptedException{
 		 
 //Test5
 		 ExtentTest test5 = extent.startTest("CreateEquipmentCategory");
-		 createSpace = createEquipmentCategory.createEquipmentCat(prop.getProperty("EnterEName"));
+		 createEquipmentCategory.createEquipmentCat(EnterEName);
+		// createSpace = createEquipmentCategory.createEquipmentCat(prop.getProperty("EnterEName"));
 		 test5.log(LogStatus.PASS, "CreateEquipmentCategory Pass");
 		 String screenShotPath4 = TestUtil.captureScreenshot(driver, "CreateEquipmentCategory");
 		 test5.log(LogStatus.PASS, logger.addScreenCapture(screenShotPath4));

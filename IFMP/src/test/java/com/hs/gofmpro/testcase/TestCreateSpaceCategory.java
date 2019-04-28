@@ -24,11 +24,10 @@ public class TestCreateSpaceCategory extends TestBase{
 		Login login;
 		CreateSpaceCategory createSpaceCategory;
 		CreateEquipmentCategory createEquipmentCategory;	
+		TestUtil testUtil;
 		CreateSpace createSpace;
-		/*XSSFWorkbook wb;
-		XSSFSheet sheet;
-		FileInputStream fis;*/
-		
+		String sheetName ="GofmInput";
+
 
 public TestCreateSpaceCategory(){
 		super();
@@ -39,13 +38,15 @@ public void setUp() throws InterruptedException, IOException{
 		initialization();
 		login = new Login();
 		createSpaceCategory = new CreateSpaceCategory();
+		testUtil = new TestUtil();
+
 		createEquipmentCategory = new CreateEquipmentCategory();
 		
 		
 		
 		}
 
-@DataProvider(name ="createSpaceCat")
+/*@DataProvider(name ="createSpaceCat")
 public Object[][] ProvideData() throws IOException{
 TestUtil excelData = new TestUtil("/home/zentere/workspace/IFMP/src/test/java/com/hs/gofmpro/utils/Gofmpro.xlsx");
 int rowCount = excelData.fetchRowCount("GofmInput");
@@ -59,8 +60,16 @@ for(int i= 0; i<rowCount;i++){
 }
 return excelColumnData;
 }
-@Test(dependsOnMethods="loginTest", dataProvider="createSpaceCat", dataProviderClass=TestCreateSpaceCategory.class )
-public void loginTest() throws InterruptedException, IOException{
+*/
+
+@DataProvider
+public Object[][] getData(){
+		Object data[][] =	TestUtil.getTestData(sheetName);
+		return data;
+}
+//@Test(dependsOnMethods="loginTest" ,dataProvider="createSpaceCat" ,dataProviderClass=TestCreateSpaceCategory.class )
+@Test(priority=1 , dataProvider="getData")
+public void loginTest(String EnterSNa ) throws InterruptedException, IOException{
 //Test1
 		createSpaceCategory = login.login(prop.getProperty("Email"), prop.getProperty("Password"));	
 		/*File src = new File ("/home/zentere/workspace/IFMP/src/test/java/com/hs/gofmpro/utils/Gofmpro.xlsx");

@@ -15,6 +15,7 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +25,15 @@ import com.hs.gofmpro.base.TestBase;
 public class TestUtil extends TestBase{
 		public static long PAGE_LOAD_TIMEOUT = 20;
 		public static long IMPLICIT_WAIT = 10;
+		
+		public static String TESTDATA_SHEET_PATH = "/home/zentere/workspace/IFMP"
+				+ "/src/test/java/com/hs/gofmpro/utils/Gofmpro.xlsx";
+
+		static Workbook book;
+		static Sheet sheet;
+		static JavascriptExecutor js;
+
+		
 		
 		public static void captureScreenshot(WebDriver driver,String screenshotName)
 				
@@ -38,13 +48,14 @@ public class TestUtil extends TestBase{
 				System.out .println("Exception while taking the screen shot");
 			} }
 		
-		private XSSFWorkbook workBook;
+		/*private XSSFWorkbook workBook;
 		private XSSFSheet sheet;
 		public TestUtil(String excelPath) throws IOException{
 			File fileName = new File(excelPath);
 			FileInputStream fileStream = new FileInputStream(fileName);
 			workBook = new XSSFWorkbook(fileStream);
 		}
+		
 		public String getTestData(String sheetName, int row, int column){
 			sheet = workBook.getSheet(sheetName);
 			String returnData = sheet.getRow(row).getCell(column).getStringCellValue();
@@ -54,7 +65,40 @@ public class TestUtil extends TestBase{
 			int rows = workBook.getSheet(sheetName).getLastRowNum();
 			rows = rows+1;
 			return rows;
+		}*/
+		
+		
+		public static Object[][] getTestData(String sheetName) {
+			FileInputStream file = null;
+			try {
+				file = new FileInputStream(TESTDATA_SHEET_PATH);
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+			}
+			try {
+				book = WorkbookFactory.create(file);
+			} catch (InvalidFormatException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			sheet = book.getSheet(sheetName);
+			Object[][] data = new Object[sheet.getLastRowNum()][sheet.getRow(0).getLastCellNum()];
+			// System.out.println(sheet.getLastRowNum() + "--------" +
+			// sheet.getRow(0).getLastCellNum());
+			for (int i = 0; i < sheet.getLastRowNum(); i++) {
+				for (int k = 0; k < sheet.getRow(0).getLastCellNum(); k++) {
+					data[i][k] = sheet.getRow(i + 1).getCell(k).toString();
+					// System.out.println(data[i][k]);
+				}
+			}
+			return data;
 		}
+		
+		
+		
+		
+		
 		
 	}
 

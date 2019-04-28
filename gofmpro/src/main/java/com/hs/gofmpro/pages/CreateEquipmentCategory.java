@@ -80,9 +80,8 @@ public CreateSpace createEquipmentCat(String EnterENa ) throws InterruptedExcept
 			element.click();
 			break;	
 			}		
-			System.out.println("Selected Storeowner is ====== "+innnerhtml);	
-			}
-			
+			System.out.println("Selected ParentCategory is ====== "+innnerhtml);	
+			}		
 		ClickSave.click();
 		Thread.sleep(5000);
 		return new CreateSpace();

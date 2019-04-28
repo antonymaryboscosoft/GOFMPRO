@@ -70,7 +70,6 @@ Structure of the facility so I can associate the equipment and maintenance.*/
 			ClickCreate.click();
 			Thread.sleep(5000);
 			EnterSName.sendKeys(EnterSNa);
-			
 			List<WebElement> list = driver.findElements(By.xpath("//select[@name='type']//option"));
 			System.out.println(list.size());	
 			for(WebElement element:list){	
@@ -81,7 +80,7 @@ Structure of the facility so I can associate the equipment and maintenance.*/
 				element.click();
 				break;	
 				}		
-				System.out.println("Selected Storeowner is ====== "+innnerhtml);	
+				System.out.println("Selected type is ====== "+innnerhtml);	
 				}
 			
 			PCategory.click();
@@ -95,7 +94,7 @@ Structure of the facility so I can associate the equipment and maintenance.*/
 				element.click();
 				break;	
 				}		
-				System.out.println("Selected Storeowner is ====== "+innnerhtml);	
+				System.out.println("Selected item is ====== "+innnerhtml);	
 				}
 			Save.click();
 			Thread.sleep(5000);
